@@ -19,8 +19,9 @@ export class HomePage {
  subredditControl: FormControl;
 
  constructor(public dataService: Data, public redditService: Reddit, public modalCtrl: ModalController) {
-   
+   //  create new FormControl
    this.subredditControl = new FormControl();
+   // subscribe to the valueChanges Observable
    this.subredditControl.valueChanges.debounceTime(1500).distinctUntilChanged().subscribe(subreddit => {
      if(subreddit != '' && subreddit) {
        this.redditService.subreddit = subreddit;
@@ -32,7 +33,7 @@ export class HomePage {
  }
 
  loadSettings(): void {
-   console.log("TODO: Implement loadSettings()");
+   this.redditService.fetchData();
  }
 
  showComments(post): void {
@@ -44,7 +45,27 @@ export class HomePage {
  }
 
  playVideo(e, post): void {
-   console.log("TODO: Implement playVideo()");
+   // Create a reference to the video
+   let video = e.target; 
+
+   if(!post.alreadyLoaded) {
+     post.showLoader = true; 
+   }
+
+   // Toggle the video playing
+   if(video.paused) {
+     // Show the loader gif
+     video.play();
+
+     // Once the video starts playing, remove the loader gif
+     video.addEventListener("playing", function(e) {
+       post.showLoader = false; 
+       post.alreadyLoaded = true; 
+     });
+   } 
+   else {
+     video.pause();
+   }
  }
 
  changeSubreddit(): void {

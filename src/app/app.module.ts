@@ -4,7 +4,7 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
 import { Storage } from '@ionic/storage';
-import { HomePage } from '../pages/home/home';
+
 import { SettingsPage } from '../pages/settings-page/settings-page';
 import { Reddit } from '../providers/reddit'; 
 import { Data } from '../providers/data';
