@@ -124,4 +124,17 @@ export class Reddit {
       console.log("subreddit doesn't exist!"); 
     });
   }
+
+  nextPage() {
+    this.page++;
+    this.fetchData();
+  }
+
+  resetPosts() {
+    this.page = 1; 
+    this.posts = [];
+    this.after = null; 
+    this.fetchData(); 
+  }
+
 }

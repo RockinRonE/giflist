@@ -4,6 +4,7 @@ import { SettingsPage } from '../settings-page/settings-page';
 import { Data } from '../../providers/data';
 import { Reddit } from '../../providers/reddit';
 import { FormControl } from '@angular/forms';
+import { InAppBrowser } from 'ionic-native'; 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -37,7 +38,7 @@ export class HomePage {
  }
 
  showComments(post): void {
-   console.log("TODO: Implement showComments()");
+   let browser = new InAppBrowser('http://reddit.com' + post.data.permalink, '_system');
  }
 
  openSettings(): void {
@@ -69,11 +70,11 @@ export class HomePage {
  }
 
  changeSubreddit(): void {
-   console.log("TODO: Implement changeSubreddit()");
+  this.redditService.resetPosts(); 
  }
 
  loadMore(): void {
-   console.log("TODO: Implement loadMore()");
+  this.redditService.nextPage(); 
  }
 
 }
